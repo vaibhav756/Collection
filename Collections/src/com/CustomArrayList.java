@@ -1,7 +1,6 @@
 package com;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
 
 public class CustomArrayList {
 
@@ -48,19 +47,46 @@ public class CustomArrayList {
 		
 		//CustomArrayList remove method
 //		list.remove(1);
-		list.update(1, "Ram");
-		System.out.println(list);
+		//Update element at particular position
+		/*list.update(1, "Ram");
+		System.out.println(list);*/
+		
+		//Inserting element at particular position
+		/*list.insert(1,150);
+		System.out.println(list);*/
+
+		//Contains method
+		//System.out.println(list.contains(100));
+		
+	}
+	
+	public Boolean contains(Object obj)
+	{
+		Boolean result=false;
+		for(int i=0;i<elements.length;i++)
+		{
+			if(obj==elements[i])
+			{
+				result=true;
+			}
+		}
+		return result;
+	}
+	
+	public Boolean isEmpty()
+	{
+		return elements.length==0?true:false;
 	}
 	
 	@Override
 	public String toString() {
-//		return Arrays.toString(elements);
-		StringJoiner sj=new StringJoiner(", ","[","]");
+		return Arrays.toString(elements);
+		/*StringJoiner sj=new StringJoiner(", ","[","]");
 		for(int i=0;i<elements.length;i++)
 		{
 			sj.add(String.valueOf(elements[i]));
 		}
-		return sj.toString();
+		return sj.toString();*/
 	}
 
 	public void insert(Integer value)
@@ -127,6 +153,30 @@ public class CustomArrayList {
 		}
 		elements[index]=obj;
 		return true;
+	}
+	
+	public void insert(Integer index,Object obj)
+	{
+		if(this.index<=index)
+		{
+			throw new ArrayIndexOutOfBoundsException("Array index is greater than array length.");
+		}
+		
+		for(int i=0;i<=index;i++)
+		{
+			if(i==index)
+			{
+				elements=Arrays.copyOf(elements, elements.length+1);
+				//Shift element by 1 position
+				for(int j=elements.length-1;j>index;j--)
+				{
+					elements[j]=elements[j-1];
+				}
+				//Add element at particular position
+				elements[i]=obj;
+			}
+		}
+		
 	}
 	
 }
